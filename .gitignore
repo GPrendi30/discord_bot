@@ -1,0 +1,15 @@
+# python compiled
+__pycache__/
+*.pyc 
+
+# database files
+*.db 
+
+# python env
+.env/
+
+# editor files
+.vscode/
+
+# test files
+test/
