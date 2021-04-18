@@ -2,6 +2,12 @@ from transformers import pipeline, Conversation
 
 from Brain.voice.voice import Voice
 
+class my_convo(Conversation):
+    
+    def __repr__(self):
+        output = self.generated_responses[-1]
+        return output
+        
 
 class Brain:
     ''' Brain of the Bot '''
@@ -13,7 +19,7 @@ class Brain:
     
     
     def feed(self, message):
-        self.convo = Conversation(message)
+        self.convo = my_convo(message)
     
             
     def answer(self):
