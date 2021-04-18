@@ -2,14 +2,18 @@
 __pycache__/
 *.pyc 
 
-# database files
-*.db 
-
 # python env
 .env/
+.venv/
 
 # editor files
 .vscode/
 
 # test files
 test/
+
+#TOKEN
+API_TOKEN
+
+#database files
+*.db 
