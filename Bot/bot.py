@@ -111,8 +111,8 @@ class Bot(Bot):
             url = "https://dad-jokes.p.rapidapi.com/joke/search?term={}".format(term)
 
         headers = {
-            'x-rapidapi-key': "5d7e9863f4mshc2307ea4ac84250p111d6cjsn1760d7946486",
-            'x-rapidapi-host': "dad-jokes.p.rapidapi.com"
+            'x-rapidapi-key': API_KEY,
+            'x-rapidapi-host': API_URL
             }
 
         response = requests.request("GET", url, headers=headers)
