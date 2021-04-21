@@ -17,7 +17,7 @@ class Bot(Bot):
         self.name = name
         self.brain = Brain()
         self.joke = False
-        self.id = read_api_key()
+        self.id = 'DISCORD_API_KEY'
         time.sleep(2)
         
         super().__init__(command_prefix="")
@@ -62,13 +62,17 @@ class Bot(Bot):
         elif message.content.startswith('$voice off'):
             await message.channel.send('Voice Mode deactivated')
             self.brain.voiceModeOff()
-                
+
+        elif message.content.startswith('$flush memory'):
+            self.reset_mem(str(message.channel.id))
+            await message.channel.send('I am brand new')
+            
         elif message.content.startswith('$Prophetize'):
             await message.channel.send("I am a prophet")
             
         else:
-            self.brain.feed(message.content)
-            answer = self.brain.answer()
+            self.brain.feed(str(message.channel.id), message.content)
+            answer = self.brain.answer(str(message.channel.id))
             if self.brain.hasVoice:
                 await message.channel.send(file=File(answer))
             else:
@@ -97,6 +101,9 @@ class Bot(Bot):
             
         return urls[random.randint(0, len(urls) - 1)]
         
+    def reset_mem(self, channel):
+        self.brain.reset_memory(channel)
+        
         
     def get_dad_joke(self, message):
         msg = message.content.split()
@@ -111,8 +118,8 @@ class Bot(Bot):
             url = "https://dad-jokes.p.rapidapi.com/joke/search?term={}".format(term)
 
         headers = {
-            'x-rapidapi-key': "5d7e9863f4mshc2307ea4ac84250p111d6cjsn1760d7946486",
-            'x-rapidapi-host': "dad-jokes.p.rapidapi.com"
+            'x-rapidapi-key': "API_KEY",
+            'x-rapidapi-host': "API_URL"
             }
 
         response = requests.request("GET", url, headers=headers)
