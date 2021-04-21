@@ -1,5 +1,7 @@
 import os
 from multiprocessing import Process
+from python_on_whales import docker
+
 
 TEXT_TO_SPEECH="gprendi30/voice"
 SPEECH_TO_TEXT="quay.io/codait/max-speech-to-text-converter"
@@ -26,14 +28,20 @@ def init_voice():
       
 def init_tts():
     global TEXT_TO_SPEECH, TTS_PORT
-    os.system('docker run -d {} {}'.format("--network=host", TEXT_TO_SPEECH))
+    try:
+        docker.run(TEXT_TO_SPEECH, detach= True, networks=['host'],name='Prophets-Voice')
+        print("TTS started in port {}".format(TTS_PORT))
+    except Exception as e:
+        docker.start('Prophets-Voice')
+        print("TTS Already running")
     
-    print("TTS started in port {}".format(TTS_PORT))
     
     
 def init_stt():
     global SPEECH_TO_TEXT, STT_PORT
-    os.system('docker run -d {} {}'.format("-p 5000:5000", SPEECH_TO_TEXT))
-    
-    print("STT started in port {}".format(STT_PORT))
-    
+    try:
+        docker.run(SPEECH_TO_TEXT, detach= True, publish=[(STT_PORT, 5000)], name='Prophets-Ears')
+        print("STT started in port {}".format(STT_PORT))
+    except:
+        docker.start('Prophets-Ears')
+        print('STT already running')
