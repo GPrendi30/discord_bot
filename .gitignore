@@ -12,8 +12,17 @@ __pycache__/
 # test files
 test/
 
+#voice_answer
+ans.wav
+
 #TOKEN
 API_TOKEN
 
 #database files
 *.db 
+
+#ans files
+*.wav
+
+# redis database files
+*.rdb
