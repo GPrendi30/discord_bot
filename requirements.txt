@@ -15,7 +15,7 @@ numpy==1.20.2
 packaging==20.9
 playsound==1.2.2
 pycparser==2.20
-pydantic==1.8.1
+pydantic==1.8.2
 pygame==2.0.1
 pyparsing==2.4.7
 python-on-whales==0.16.0
@@ -31,5 +31,5 @@ tqdm==4.60.0
 transformers==4.5.0
 typer==0.3.2
 typing-extensions==3.7.4.3
-urllib3==1.26.4
+urllib3>=1.26.5
 yarl==1.6.3
